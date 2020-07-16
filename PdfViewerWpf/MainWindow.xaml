@@ -1,0 +1,40 @@
+﻿<Window x:Class="PdfViewerWpf.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:PdfViewerWpf"
+        mc:Ignorable="d"
+        d:DataContext="{x:Static local:MainViewModel.DesignTimeInstance}"
+        Title="MainWindow" 
+        Height="600" 
+        Width="500"
+        Loaded="Window_Loaded">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Button Content="Load PDF Document"
+                Click="Button_Click"/>
+        <Grid x:Name="grid1"
+              Grid.Row="1">
+            
+        </Grid>
+        <!--<ItemsControl ItemsSource="{Binding PdfPages}"
+                      Grid.Row="1"
+                      ScrollViewer.CanContentScroll="True"
+                      VirtualizingStackPanel.IsVirtualizing="true">
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel Orientation="Vertical"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+            <ItemsControl.ItemTemplate>
+                <DataTemplate DataType="{x:Type local:PdfPageViewModel}">
+                    <Image Source="{Binding Image}"/>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>-->
+    </Grid>
+</Window>

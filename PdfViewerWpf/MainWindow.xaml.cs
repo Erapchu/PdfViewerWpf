@@ -42,34 +42,35 @@ namespace PdfViewerWpf
 
                 if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    _pdfViewer.Document = PdfDocument.Load(dialog.FileName);
+                    //_pdfViewer.Document = PdfDocument.Load(dialog.FileName);
 
-                    /*ViewModel.PdfPages.Clear();
+                    ViewModel.PdfPages.Clear();
                     using (var pdfDocument = PdfDocument.Load(dialog.FileName))
                     {
                         for (int i = 0; i < pdfDocument.PageCount; i++)
                         {
-                            var gdi = pdfDocument.Render(i, 96, 96, true);
+                            var gdi = pdfDocument.Render(i, 96, 96, false);
                             var wpfImage = gdi.GetImageWpf();
                             ViewModel.PdfPages.Add(new PdfPageViewModel(wpfImage));
                             GC.Collect();
                         }
-                    }*/
+                    }
                 }
             }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            // Create the interop host control.
+            /*// Create the interop host control.
             System.Windows.Forms.Integration.WindowsFormsHost host = new System.Windows.Forms.Integration.WindowsFormsHost();
 
             _pdfViewer = new PdfViewer();
             _pdfViewer.ShowToolbar = false;
+            _pdfViewer.ShowBookmarks = false;
             host.Child = _pdfViewer;
             // Add the interop host control to the Grid
             // control's collection of child controls.
-            this.grid1.Children.Add(host);
+            this.grid1.Children.Add(host);*/
         }
     }
 }

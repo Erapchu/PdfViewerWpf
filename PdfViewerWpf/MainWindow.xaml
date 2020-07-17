@@ -17,24 +17,39 @@
         </Grid.RowDefinitions>
         <Button Content="Load PDF Document"
                 Click="Button_Click"/>
-        <Grid x:Name="grid1"
+        <!--<Grid x:Name="grid1"
               Grid.Row="1">
             
-        </Grid>
-        <!--<ItemsControl ItemsSource="{Binding PdfPages}"
-                      Grid.Row="1"
-                      ScrollViewer.CanContentScroll="True"
-                      VirtualizingStackPanel.IsVirtualizing="true">
+        </Grid>-->
+        <ItemsControl ItemsSource="{Binding PdfPages}"
+                      Grid.Row="1">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
-                    <VirtualizingStackPanel Orientation="Vertical"/>
+                    <VirtualizingStackPanel Orientation="Vertical"
+                                            IsVirtualizing="True"
+                                            VirtualizationMode="Recycling"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
+            
             <ItemsControl.ItemTemplate>
                 <DataTemplate DataType="{x:Type local:PdfPageViewModel}">
                     <Image Source="{Binding Image}"/>
                 </DataTemplate>
             </ItemsControl.ItemTemplate>
-        </ItemsControl>-->
+
+            <ItemsControl.Template>
+                <ControlTemplate>
+                    <Border BorderThickness="{TemplateBinding BorderThickness}"
+                      BorderBrush="{TemplateBinding BorderBrush}"
+                      Background="{TemplateBinding Background}">
+                        <ScrollViewer CanContentScroll="True" 
+                      Padding="{TemplateBinding Padding}"
+                      Focusable="False">
+                            <ItemsPresenter />
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </ItemsControl.Template>
+        </ItemsControl>
     </Grid>
 </Window>

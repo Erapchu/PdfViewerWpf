@@ -19,10 +19,15 @@ namespace PdfViewerWpf
                 return null;
 
             var bitmap = new Bitmap(image);
-            var wpfImage = Imaging.CreateBitmapSourceFromHBitmap(bitmap.GetHbitmap(),
+            var hBitmap = bitmap.GetHbitmap();
+            var wpfImage = Imaging.CreateBitmapSourceFromHBitmap(hBitmap,
                 IntPtr.Zero,
                 Int32Rect.Empty,
                 BitmapSizeOptions.FromEmptyOptions());
+
+            NativeMethods.DeleteObject(hBitmap);
+            wpfImage.Freeze();
+            
             return wpfImage;
         }
     }

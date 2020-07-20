@@ -8,7 +8,7 @@
         d:DataContext="{x:Static local:MainViewModel.DesignTimeInstance}"
         Title="MainWindow" 
         Height="600" 
-        Width="500"
+        Width="400"
         Loaded="Window_Loaded">
     <Grid>
         <Grid.RowDefinitions>
@@ -27,7 +27,7 @@
                 <ItemsPanelTemplate>
                     <VirtualizingStackPanel Orientation="Vertical"
                                             IsVirtualizing="True"
-                                            VirtualizationMode="Recycling"/>
+                                            VirtualizationMode="Standard"/>
                 </ItemsPanelTemplate>
             </ItemsControl.ItemsPanel>
             
@@ -40,11 +40,11 @@
             <ItemsControl.Template>
                 <ControlTemplate>
                     <Border BorderThickness="{TemplateBinding BorderThickness}"
-                      BorderBrush="{TemplateBinding BorderBrush}"
-                      Background="{TemplateBinding Background}">
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Background="{TemplateBinding Background}">
                         <ScrollViewer CanContentScroll="True" 
-                      Padding="{TemplateBinding Padding}"
-                      Focusable="False">
+                                      Padding="{TemplateBinding Padding}"
+                                      Focusable="False">
                             <ItemsPresenter />
                         </ScrollViewer>
                     </Border>

@@ -42,16 +42,16 @@ namespace PdfViewerWpf
 
                 if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 {
-                    //_pdfViewer.Document = PdfDocument.Load(dialog.FileName);
-
                     ViewModel.PdfPages.Clear();
                     using (var pdfDocument = PdfDocument.Load(dialog.FileName))
                     {
                         for (int i = 0; i < pdfDocument.PageCount; i++)
                         {
-                            var gdi = pdfDocument.Render(i, 96, 96, false);
-                            var wpfImage = gdi.GetImageWpf();
-                            ViewModel.PdfPages.Add(new PdfPageViewModel(wpfImage));
+                            using (var gdi = pdfDocument.Render(i, 96, 96, false))
+                            {
+                                var wpfImage = gdi.GetImageWpf();
+                                ViewModel.PdfPages.Add(new PdfPageViewModel(wpfImage));
+                            }
                             GC.Collect();
                         }
                     }

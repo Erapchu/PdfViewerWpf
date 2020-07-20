@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PdfiumViewer;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
@@ -25,7 +26,22 @@ namespace PdfViewerWpf
         public static MainViewModel DesignTimeInstance => _lazyDesignTimeInstance.Value;
         #endregion
 
-        public ObservableCollection<PdfPageViewModel> PdfPages { get; set; } = new ObservableCollection<PdfPageViewModel>();
+        //public ObservableCollection<PdfPageViewModel> PdfPages { get; set; } = new ObservableCollection<PdfPageViewModel>();
+
+        private ImageSource _visiblePdfPage;
+        public ImageSource VisiblePdfPage
+        {
+            get => _visiblePdfPage;
+            set
+            {
+                _visiblePdfPage = value;
+                RaisePropertyChanged();
+            }
+        }
+
+        public PdfDocument LoadedDocument { get; set; }
+
+        public int CurrentPage { get; set; }
 
         public MainViewModel()
         {

@@ -15,13 +15,25 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
-        <Button Content="Load PDF Document"
+        <StackPanel Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+            <Button Content="Load PDF Document"
                 Click="Button_Click"/>
+            <Button Content="Next page"
+                    Click="NextButton_Click"/>
+            <Button Content="Previous page"
+                    Click="PrevButton_Click"/>
+        </StackPanel>
+        
         <!--<Grid x:Name="grid1"
               Grid.Row="1">
             
         </Grid>-->
-        <ItemsControl ItemsSource="{Binding PdfPages}"
+
+        <Image Source="{Binding VisiblePdfPage}"
+               Grid.Row="1"/>
+
+        <!--<ItemsControl ItemsSource="{Binding PdfPages}"
                       Grid.Row="1">
             <ItemsControl.ItemsPanel>
                 <ItemsPanelTemplate>
@@ -50,6 +62,6 @@
                     </Border>
                 </ControlTemplate>
             </ItemsControl.Template>
-        </ItemsControl>
+        </ItemsControl>-->
     </Grid>
 </Window>

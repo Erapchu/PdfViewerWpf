@@ -27,10 +27,49 @@ namespace PdfViewerWpf
 
         private PdfViewer _pdfViewer;
 
+        private List<Rectangle> _highlightedRects = new List<Rectangle>();
+        private Color[] _colors = new Color[] 
+        { 
+            Color.FromRgb(0xFF, 0x00, 0x00),
+            Color.FromRgb(0x00, 0xFF, 0x00),
+            Color.FromRgb(0x00, 0x00, 0xFF)
+        };
+
         public MainWindow()
         {
             InitializeComponent();
-            DataContext = new MainViewModel();
+            var vm = new MainViewModel();
+            vm.DoHighlight += ViewModel_DoHighlight;
+            DataContext = vm;
+        }
+
+        private void ViewModel_DoHighlight(List<HighlightingRequest> highlightingRequest)
+        {
+            foreach (var highlightedRect in _highlightedRects)
+                rootCanvas.Children.Remove(highlightedRect);
+
+            int colorNumber = 0;
+
+            foreach (var highlight in highlightingRequest)
+            {
+                Rectangle rectangle = new Rectangle
+                {
+                    Stroke = new SolidColorBrush(_colors[colorNumber]),
+                    StrokeThickness = 2,
+                    Fill = new SolidColorBrush(_colors[colorNumber]),
+                    Opacity = 0.5,
+                    Width = highlight.Rectangle.Width,
+                    Height = highlight.Rectangle.Height
+                };
+                rootCanvas.Children.Add(rectangle);
+                Canvas.SetLeft(rectangle, highlight.Rectangle.X);
+                Canvas.SetTop(rectangle, highlight.Rectangle.Y);
+                _highlightedRects.Add(rectangle);
+                if (colorNumber < _colors.Length - 1)
+                    colorNumber++;
+                else
+                    colorNumber = 0;
+            }
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
@@ -45,6 +84,14 @@ namespace PdfViewerWpf
             // Add the interop host control to the Grid
             // control's collection of child controls.
             this.grid1.Children.Add(host);*/
+        }
+
+        private void Grid_MouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if (e.Delta > 0)
+                ViewModel.GoPrevPage();
+            else
+                ViewModel.GoNextPage();
         }
     }
 }

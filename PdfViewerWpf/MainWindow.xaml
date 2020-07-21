@@ -13,16 +13,21 @@
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Center">
             <Button Content="Load PDF Document"
                     Command="{Binding LoadPdfCommand}"/>
-            <Button Content="Next page"
-                    Command="{Binding NextPageCommand}"/>
-            <Button Content="Previous page"
-                    Command="{Binding PrevPageCommand}"/>
+        </StackPanel>
+        <StackPanel Grid.Row="1" 
+                    Orientation="Horizontal"
+                    HorizontalAlignment="Center">
+            <TextBox MinWidth="100"
+                     Text="{Binding SearchableText}"/>
+            <Button Content="Search"
+                    Command="{Binding SearchCommand}"/>
         </StackPanel>
         
         <!--<Grid x:Name="grid1"
@@ -30,19 +35,16 @@
             
         </Grid>-->
 
-        <Image Source="{Binding VisiblePdfPage}"
-               Grid.Row="1"/>
+        <Canvas Grid.Row="2"
+              x:Name="rootCanvas">
+            <Border BorderBrush="Black" 
+                    BorderThickness="1">
+                <Image Source="{Binding VisiblePdfPage}"/>
+            </Border>
+        </Canvas>
 
         <!--<ItemsControl ItemsSource="{Binding PdfPages}"
-                      Grid.Row="1">
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <VirtualizingStackPanel Orientation="Vertical"
-                                            IsVirtualizing="True"
-                                            VirtualizationMode="Standard"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-            
+                      Grid.Row="2">
             <ItemsControl.ItemTemplate>
                 <DataTemplate DataType="{x:Type local:PdfPageViewModel}">
                     <Image Source="{Binding Image}"/>
@@ -62,6 +64,69 @@
                     </Border>
                 </ControlTemplate>
             </ItemsControl.Template>
+
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel Orientation="Vertical"
+                                            IsVirtualizing="True"
+                                            VirtualizationMode="Standard"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
         </ItemsControl>-->
+
+        <!--<ItemsControl Grid.Row="2">
+
+            <ItemsControl.Template>
+                <ControlTemplate>
+                    <Border BorderThickness="{TemplateBinding BorderThickness}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            Background="{TemplateBinding Background}">
+                        <ScrollViewer CanContentScroll="True" 
+                                      Padding="{TemplateBinding Padding}"
+                                      Focusable="False">
+                            <ItemsPresenter />
+                        </ScrollViewer>
+                    </Border>
+                </ControlTemplate>
+            </ItemsControl.Template>
+
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <ItemsControl>
+                        <ItemsControl.Template>
+                            <ControlTemplate TargetType="{x:Type ItemsControl}">
+                                <ItemsPresenter />
+                            </ControlTemplate>
+                        </ItemsControl.Template>
+                        <ItemsControl.Style>
+                            <Style TargetType="ItemsControl">
+                                <Setter Property="ItemTemplate">
+                                    <Setter.Value>
+                                        <DataTemplate DataType="{x:Type local:PdfPageViewModel}">
+                                            <Image Source="{Binding Image}"/>
+                                        </DataTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="ItemsPanel">
+                                    <Setter.Value>
+                                        <ItemsPanelTemplate>
+                                            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" />
+                                        </ItemsPanelTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ItemsControl.Style>
+                    </ItemsControl>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+
+            <ItemsControl.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <VirtualizingStackPanel Orientation="Vertical"
+                                            IsVirtualizing="True"
+                                            VirtualizationMode="Standard"/>
+                </ItemsPanelTemplate>
+            </ItemsControl.ItemsPanel>
+        </ItemsControl> -->
     </Grid>
 </Window>

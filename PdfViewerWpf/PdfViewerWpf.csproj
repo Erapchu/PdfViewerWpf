@@ -79,6 +79,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CustomVirtualizingPanel.cs" />
+    <Compile Include="HighlightingRequest.cs" />
+    <Compile Include="Virtualizing\IItemsProvider.cs" />
+    <Compile Include="Virtualizing\PdfPageProvider.cs" />
+    <Compile Include="Virtualizing\VirtualizingCollection.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

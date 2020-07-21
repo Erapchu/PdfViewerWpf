@@ -33,37 +33,6 @@ namespace PdfViewerWpf
             DataContext = new MainViewModel();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            using (var dialog = new System.Windows.Forms.OpenFileDialog())
-            {
-                dialog.Filter = "PDF Files (*.pdf)|*.pdf|All Files (*.*)|*.*";
-                dialog.Title = "Open PDF File";
-
-                if (dialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                {
-                    ViewModel.LoadedDocument?.Dispose();
-                    ViewModel.LoadedDocument = PdfDocument.Load(dialog.FileName);
-                    ViewModel.CurrentPage = 0;
-                    ViewModel.VisiblePdfPage = ViewModel.LoadedDocument.Render(ViewModel.CurrentPage, 96, 96, false).GetImageWpf();
-
-                    /*ViewModel.PdfPages.Clear();
-                    using (var pdfDocument = PdfDocument.Load(dialog.FileName))
-                    {
-                        for (int i = 0; i < pdfDocument.PageCount; i++)
-                        {
-                            using (var gdi = pdfDocument.Render(i, 96, 96, false))
-                            {
-                                var wpfImage = gdi.GetImageWpf();
-                                ViewModel.PdfPages.Add(new PdfPageViewModel(wpfImage));
-                            }
-                            GC.Collect();
-                        }
-                    }*/
-                }
-            }
-        }
-
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             /*// Create the interop host control.
@@ -76,20 +45,6 @@ namespace PdfViewerWpf
             // Add the interop host control to the Grid
             // control's collection of child controls.
             this.grid1.Children.Add(host);*/
-        }
-
-        private void NextButton_Click(object sender, RoutedEventArgs e)
-        {
-            ViewModel.CurrentPage++;
-            ViewModel.VisiblePdfPage = ViewModel.LoadedDocument.Render(ViewModel.CurrentPage, 96, 96, false).GetImageWpf();
-            GC.Collect();
-        }
-
-        private void PrevButton_Click(object sender, RoutedEventArgs e)
-        {
-            ViewModel.CurrentPage--;
-            ViewModel.VisiblePdfPage = ViewModel.LoadedDocument.Render(ViewModel.CurrentPage, 96, 96, false).GetImageWpf();
-            GC.Collect();
         }
     }
 }

@@ -18,11 +18,11 @@
         <StackPanel Orientation="Horizontal"
                     HorizontalAlignment="Center">
             <Button Content="Load PDF Document"
-                Click="Button_Click"/>
+                    Command="{Binding LoadPdfCommand}"/>
             <Button Content="Next page"
-                    Click="NextButton_Click"/>
+                    Command="{Binding NextPageCommand}"/>
             <Button Content="Previous page"
-                    Click="PrevButton_Click"/>
+                    Command="{Binding PrevPageCommand}"/>
         </StackPanel>
         
         <!--<Grid x:Name="grid1"
